@@ -18,8 +18,8 @@ class StatistiqueController extends Controller
         $cars=Car::count();
         $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
                                             ->where( DB::raw("YEAR(dateEnregistrement)"),'=',date('Y'))
-                                            ->first();
-        $consomAnnuelle=$consommationAnnuelle->compteur;
+                                            ->get();
+        $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
         return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
 
