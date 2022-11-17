@@ -16,7 +16,7 @@ class StatistiqueController extends Controller
     public function create(){
         $records=Enregistrement::orderBy('numOrdre','DESC')->get();
         $cars=Car::count();
-        $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"),'date_enregistrement')
+        $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
                                             ->where( DB::raw("YEAR(date_enregistrement)"),'=',date('Y'))
                                             ->get();
         $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
