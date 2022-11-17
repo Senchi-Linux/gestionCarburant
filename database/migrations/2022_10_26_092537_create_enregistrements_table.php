@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('numOrdre')->unique();
             $table->date('dateEnregistrement');
-            $table->foreignId('car_id')->constrained('vehicules')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('car_id')->constrained('cars')->onUpdate('cascade')->onDelete('cascade');
           //  $table->foreignId('driver_id')->constrained('conducteurs')->onUpdate('cascade')->onDelete('cascade');
             $table->longText('driver');
             $table->bigInteger('km');

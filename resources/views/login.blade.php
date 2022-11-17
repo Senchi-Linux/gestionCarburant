@@ -6,8 +6,8 @@
 
         <title>{{ pageTitle($title ?? null) }}</title>
 
-        <link rel="apple-touch-icon" href="apple-icon.png">
-        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="apple-touch-icon" href="{{asset('/images/logo.png')}}">
+        <link rel="shortcut icon" href="{{asset('/images/logo.png')}}">
         <link rel="stylesheet" href="{{asset('/vendors/typicons.font/font/typicons.css')}}">
   <link rel="stylesheet" href="{{asset('/vendors/css/vendor.bundle.base.css')}}">
   <!-- endinject -->
