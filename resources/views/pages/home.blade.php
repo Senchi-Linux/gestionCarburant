@@ -71,7 +71,7 @@
                         @foreach($records as $record)
                      <tr>
                          <td>{{$record->numOrdre}}</td>
-                         <td>{{date('d-m-Y',strtotime($record->dateEnregistrement))}}</td>
+                         <td>{{date('d-m-Y',strtotime($record->date_enregistrement))}}</td>
                          <td>{{$record->car->designation}} | {{$record->car->immatriculation}}</td>
                          <td> {{$record->km}}</td>
                          <td> {{$record->numBon}}</td>

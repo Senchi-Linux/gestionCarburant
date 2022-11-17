@@ -67,7 +67,7 @@ class CarController extends Controller
     }
 
     public function detail(Car $vehicule){
-        $records=Enregistrement::select('*')->orderBy('dateEnregistrement')->where('car_id', $vehicule->id)->get();
+        $records=Enregistrement::select('*')->orderBy('date_enregistrement')->where('car_id', $vehicule->id)->get();
         return view('pages.detail_vehicule', compact('vehicule','records'));
     }
 }

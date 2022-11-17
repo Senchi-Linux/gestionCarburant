@@ -23,7 +23,7 @@ class EnregistrementController extends Controller
         }else{
             Enregistrement::create([
                 'numOrdre'=>($numOrdre+1),
-                'dateEnregistrement'=>$req->dateEnregistrement,
+                'date_enregistrement'=>$req->date_enregistrement,
                 'car_id'=>$req->vehicule,
                 'driver'=>$req->conducteur,
                 //'driver_id'=>$req->conducteur,
@@ -51,7 +51,7 @@ class EnregistrementController extends Controller
             return back()->with('Erreur','le Bon N° '.$req->bon.' existe déjà');
         }else{
             $record->update([
-                'dateEnregistrement'=>$req->dateEnregistrement,
+                'date_enregistrement'=>$req->date_enregistrement,
                 'car_id'=>$req->vehicule,
                 'driver'=>$req->conducteur,
                 //'driver_id'=>$req->conducteur,

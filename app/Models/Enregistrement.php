@@ -9,7 +9,7 @@ class Enregistrement extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'numOrdre','dateEnregistrement','car_id','driver','km','numBon','responsable','montant'
+        'numOrdre','date_enregistrement','car_id','driver','km','numBon','responsable','montant'
     ];
 
     public function car(){

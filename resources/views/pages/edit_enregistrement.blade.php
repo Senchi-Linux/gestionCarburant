@@ -13,7 +13,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Date </label>
                           <div class="col-sm-9">
-                            <input type="date" name="dateEnregistrement" class="form-control" required value="{{$record->dateEnregistrement}}">
+                            <input type="date" name="date_enregistrement" class="form-control" required value="{{$record->date_enregistrement}}">
                           </div>
                         </div>
                       </div>

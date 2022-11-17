@@ -46,7 +46,7 @@
                       @foreach($records as $record)
                       <?php $kml=($record->km)-$cpt;if($kml==$record->km){$kml='-'; $cpt='-'; }?>
                       <tr>
-                        <td width="20%">{{date('d-m-Y',strtotime($record->dateEnregistrement))}}</td>
+                        <td width="20%">{{date('d-m-Y',strtotime($record->date_enregistrement))}}</td>
                         <td width="10%">{{$record->numBon}}</td>
                         <td width="20%">@if($record->responsable=="Delegue")
                           DR Hicham Alaoui Ismaili

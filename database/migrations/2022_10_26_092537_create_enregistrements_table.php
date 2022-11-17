@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('enregistrements', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('numOrdre')->unique();
-            $table->date('dateEnregistrement');
+            $table->date('date_enregistrement');
             $table->foreignId('car_id')->constrained('cars')->onUpdate('cascade')->onDelete('cascade');
           //  $table->foreignId('driver_id')->constrained('conducteurs')->onUpdate('cascade')->onDelete('cascade');
             $table->longText('driver');
