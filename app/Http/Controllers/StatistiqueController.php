@@ -22,7 +22,7 @@ class StatistiqueController extends Controller
                                             ->where( DB::raw("YEAR(date_enregistrement)"),'=',$now)
                                             ->get();
         $consomAnnuelle=$consommationAnnuelle[0]['compteur'];*/
-        $consomAnnuelle=Enregistrement::where( DB::raw("YEAR(date_enregistrement)"),'=',$now)
+        $consomAnnuelle=Enregistrement::where(YEAR(date_enregistrement),'=',$now)
                                             ->sum('montant');
           return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
