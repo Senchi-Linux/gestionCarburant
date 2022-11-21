@@ -16,11 +16,12 @@ class StatistiqueController extends Controller
     public function create(){
         $records=Enregistrement::orderBy('numOrdre','DESC')->get();
         $cars=Car::count();
-        $currentYear =Carbon::now()->format('Y');
-     
+        $cyear =Carbon::now()->format('Y');
+        $currentYear=(int)$cyear;
         $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
                                             ->where( DB::raw("YEAR(date_enregistrement)"),'=',$currentYear)
                                             ->get();
+        
         $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
        return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
