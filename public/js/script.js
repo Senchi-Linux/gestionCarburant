@@ -30,7 +30,7 @@ function validerSup(params){
 
 
 $(document).ready(function () {
-  let url_variable="http://127.0.0.1:8000/";
+  let url_variable="https://app-gestion-carburant.herokuapp.com/";
   let monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai","Juin","Juillet", "Août", "Septembre", "Octobre", "Novembre","Décembre"];
 
     $.ajaxSetup({
