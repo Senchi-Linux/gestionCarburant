@@ -18,18 +18,18 @@ class StatistiqueController extends Controller
         $cars=Car::count();
         $cyear =Carbon::now()->format('Y-m-d');
         $currentYear=Carbon::createFromFormat('Y-m-d', $cyear)->format('Y');
-       /* $currentYear=(int)$cyear;
+       // $currentYear=(int)$cyear;
         $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
-                                            ->where(DB::raw("YEAR(date_enregistrement)"),$currentYear)
+                                            ->where(DB::raw("DB::extract(year from 'date_enregistrement')"),'=',$currentYear)
                                             ->first();
-        
-        $consomAnnuelle=$consommationAnnuelle[0]['compteur'];*/
-        $consomAnnuelle=0;
+        var_dump($consommationAnnuelle);
+        //$consomAnnuelle=$consommationAnnuelle[0]['compteur'];
+        //$consomAnnuelle=0;
 
 
 
         
-       return view('pages.home', compact('records','cars','consomAnnuelle'));
+      // return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
 
     public function getConsByMonthOfCar(Request $req){
