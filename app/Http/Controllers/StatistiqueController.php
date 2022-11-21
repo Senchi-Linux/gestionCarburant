@@ -20,8 +20,7 @@ class StatistiqueController extends Controller
         $currentYear=Carbon::createFromFormat('Y-m-d', $cyear)->format('Y');
        // $currentYear=(int)$cyear;
         $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
-                                            ->where(DB::raw("to_char(date_trunc('year', date_enregistrement), 'YYYY') AS year"),'=',$currentYear)
-                                            
+                                            ->where(DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$currentYear)
                                             ->first();
         var_dump($consommationAnnuelle);
         //$consomAnnuelle=$consommationAnnuelle[0]['compteur'];
