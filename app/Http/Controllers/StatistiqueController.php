@@ -19,7 +19,7 @@ class StatistiqueController extends Controller
         $cyear =Carbon::now()->format('Y');
         $currentYear=(int)$cyear;
         $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
-                                            ->where( DB::raw("DATE_FORMAT(date_enregistrement,'%Y')"),'=',$currentYear)
+                                            ->where(DB::raw("YEAR(date_enregistrement)"),'=',$currentYear)
                                             ->get();
         
         $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
