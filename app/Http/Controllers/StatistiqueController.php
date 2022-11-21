@@ -16,14 +16,13 @@ class StatistiqueController extends Controller
     public function create(){
         $records=Enregistrement::orderBy('numOrdre','DESC')->get();
         $cars=Car::count();
-        $currentYear= Carbon::now();
-        $now=$currentYear->year;
-        $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(cast(montant as double precision)) AS compteur"))
-                                            ->where( DB::raw("YEAR(date_enregistrement)"),'=',$now)
+        $currentYear =Carbon::now()->format('Y');
+     
+        $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
+                                            ->where( DB::raw("YEAR(date_enregistrement)"),'=',$currentYear)
                                             ->get();
         $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
-       
-          return view('pages.home', compact('records','cars','consomAnnuelle'));
+       return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
 
     public function getConsByMonthOfCar(Request $req){
