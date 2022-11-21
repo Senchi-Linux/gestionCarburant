@@ -18,13 +18,10 @@ class StatistiqueController extends Controller
         $cars=Car::count();
         $cyear =Carbon::now()->format('Y-m-d');
         $currentYear=Carbon::createFromFormat('Y-m-d', $cyear)->format('Y');
-       // $currentYear=(int)$cyear;
         $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
                                             ->where(DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$currentYear)
                                             ->get();
-        // var_dump($consommationAnnuelle);
        $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
-        //$consomAnnuelle=0;
 
 
 
@@ -44,10 +41,30 @@ class StatistiqueController extends Controller
        $lastMonth=date("m", strtotime('-1 month', strtotime($req->dateprecisee)));
 
 
-      $records_v=Enregistrement::where('car_id',$req->car)->where( DB::raw("MONTH(date_enregistrement)"),'=',$monthd)->where( DB::raw("YEAR(date_enregistrement)"),'=',$yeard)->orderBy('numOrdre')->get();
-        $records_compteur_mois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), DB::raw("DAY(date_enregistrement) AS indice"))->where('car_id',$req->car)->where( DB::raw("MONTH(date_enregistrement)"),'=',$monthd)->where( DB::raw("YEAR(date_enregistrement)"),'=',$yeard)->groupBy(DB::raw("DAY(date_enregistrement)"))->get();
-        $records_compteur_year=Enregistrement::select(DB::raw("SUM(montant) AS compteur_y"), DB::raw("MONTH(date_enregistrement) AS indicem"))->where('car_id',$req->car)->where( DB::raw("YEAR(date_enregistrement)"),'=',$yeard)->groupBy(DB::raw("MONTH(date_enregistrement)"))->get();
-        $cpt=Enregistrement::select('km')->where('car_id',$req->car)->where( DB::raw("MONTH(date_enregistrement)"),'=',$lastMonth)->where( DB::raw("YEAR(date_enregistrement)"),'=',$yeard)->orderBy('numOrdre','DESC')->first();
+      $records_v=Enregistrement::where('car_id',$req->car)
+                                 ->where( DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$monthd)
+                                 ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
+                                 ->orderBy('numOrdre')
+                                 ->get();
+
+        $records_compteur_mois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), DB::raw("to_char(date_trunc('day', date_enregistrement),'dd') AS indice"))
+                                               ->where('car_id',$req->car)->where( DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$monthd)
+                                               ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
+                                               ->groupBy(DB::raw("to_char(date_trunc('day', date_enregistrement),'dd')"))
+                                               ->get();
+
+        $records_compteur_year=Enregistrement::select(DB::raw("SUM(montant) AS compteur_y"), DB::raw("to_char(date_trunc('month', date_enregistrement),'mm') AS indicem"))
+                                               ->where('car_id',$req->car)
+                                               ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
+                                               ->groupBy(DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"))
+                                               ->get();
+
+        $cpt=Enregistrement::select('km')
+                             ->where('car_id',$req->car)
+                             ->where( DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$lastMonth)
+                             ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
+                             ->orderBy('numOrdre','DESC')
+                             ->first();
        
         if($cpt!=null){
             $lastKm=$cpt->km;
@@ -95,10 +112,10 @@ class StatistiqueController extends Controller
         $monthd= date("m", strtotime($req->dateprecisee));
         $number = cal_days_in_month(CAL_GREGORIAN, $monthd, $yeard);
 
-        $consommationparmois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), DB::raw("DAY(date_enregistrement) AS indice"))
-                                            ->where( DB::raw("MONTH(date_enregistrement)"),'=',$monthd)
-                                            ->where( DB::raw("YEAR(date_enregistrement)"),'=',$yeard)
-                                            ->groupBy(DB::raw("DAY(date_enregistrement)"))
+        $consommationparmois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), DB::raw("to_char(date_trunc('day', date_enregistrement),'dd') AS indice"))
+                                            ->where( DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$monthd)
+                                            ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
+                                            ->groupBy(DB::raw("to_char(date_trunc('day', date_enregistrement),'dd')"))
                                             ->get();
         
 
@@ -129,9 +146,9 @@ class StatistiqueController extends Controller
         $tableMonths=[];
         $monthName=null;
 
-        $consommationparannee=Enregistrement::select(DB::raw("SUM(montant) AS compteur_year"), DB::raw("MONTH(date_enregistrement) AS indicem"))
-                                            ->where( DB::raw("YEAR(date_enregistrement)"),'=',$req->dateprecisee)
-                                            ->groupBy(DB::raw("MONTH(date_enregistrement)"))
+        $consommationparannee=Enregistrement::select(DB::raw("SUM(montant) AS compteur_year"), DB::raw("to_char(date_trunc('month', date_enregistrement),'mm') AS indicem"))
+                                            ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$req->dateprecisee)
+                                            ->groupBy(DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"))
                                             ->get();
 
         
@@ -167,8 +184,8 @@ class StatistiqueController extends Controller
         $tableidCars=[];
         $valeeeur=[];
         $consommationparmois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), 'car_id as vehicule')
-                                                ->where(DB::raw("MONTH(date_enregistrement)"),'=',$monthd)
-                                                ->where(DB::raw("YEAR(date_enregistrement)"),'=',$yeard)
+                                                ->where(DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$monthd)
+                                                ->where(DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
                                                 ->groupBy('car_id')
                                                 ->get();
         $cars= Car::select('*')->get();
@@ -202,7 +219,7 @@ class StatistiqueController extends Controller
         $tableidCars=[];
         $valeeeur=[];
         $consommationparan=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), 'car_id as vehicule')
-                                                ->where( DB::raw("YEAR(date_enregistrement)"),'=',$yeard)
+                                                ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
                                                 ->groupBy('car_id')
                                                 ->get();
         $cars= Car::select('*')->get();
