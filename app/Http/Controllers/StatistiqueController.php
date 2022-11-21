@@ -111,7 +111,7 @@ class StatistiqueController extends Controller
         $yeard= date("Y", strtotime($req->dateprecisee));
         $monthd= date("m", strtotime($req->dateprecisee));
         //$number= cal_days_in_month(CAL_GREGORIAN, $monthd, $yeard);
-        $number=month($monthd)->daysInMonth;
+        $number=Carbon::now()->month($monthd)->daysInMonth;
         $consommationparmois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), DB::raw("to_char(date_trunc('day', date_enregistrement),'dd') AS indice"))
                                             ->where( DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$monthd)
                                             ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
