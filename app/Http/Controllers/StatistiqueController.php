@@ -110,7 +110,6 @@ class StatistiqueController extends Controller
 
         $yeard= date("Y", strtotime($req->dateprecisee));
         $monthd= date("m", strtotime($req->dateprecisee));
-        //$number= cal_days_in_month(CAL_GREGORIAN, $monthd, $yeard);
         $number=Carbon::now()->month($monthd)->daysInMonth;
         $consommationparmois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), DB::raw("to_char(date_trunc('day', date_enregistrement),'dd') AS indice"))
                                             ->where( DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$monthd)
@@ -157,10 +156,9 @@ class StatistiqueController extends Controller
             array_push($tableMonths,$value->indicem );
         }
         for($i=1; $i<=12; $i++){
-            $date = Carbon::createFromFormat('m', $i);
+            $date = Carbon::createFromFormat('mm', $i);
             $monthName = $date->format('M');
             if(in_array($i,$tableMonths)){
-            
                 $results[$monthName]=$tableValue[$i];
             }else{
                 $results[$monthName]=0;
