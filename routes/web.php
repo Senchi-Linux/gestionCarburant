@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ConducteurController;
 use App\Http\Controllers\EnregistrementController;
@@ -35,7 +34,7 @@ Route::get('deconnecter_utilisateur',[UserController::class,'logout'])->name('ap
 Route::post('mettre_a_jour_profil_utilisateur',[UserController::class, 'update_profil'])->name('app_update_user');
 
 
-Route::get('home', [StatistiqueController::class,'create'])->name('app_home_page');
+Route::get('home',[StatistiqueController::class,'create'])->name('app_home_page');
 
 
 Route::get('vehicules',[CarController::class,'create'])->name('app_page_vehicule');
@@ -47,7 +46,7 @@ Route::put('activation_vehicule/{vehicule}',[CarController::class,'activer'])->n
 Route::get('details_vehicule/{vehicule}',[CarController::class,'detail'])->name('app_detail_car');
 
 
-Route::get('conducteurs', [ConducteurController::class, 'create'])->name('app_page_conducteur');
+Route::get('conducteurs',[ConducteurController::class, 'create'])->name('app_page_conducteur');
 Route::post('nouveau_conducteur',[ConducteurController::class, 'add'])->name('app_add_driver');
 Route::get('conducteur_page/{conducteur}',[ConducteurController::class,'edit'])->name('app_edit_driver');
 Route::post('mise_a_jour_conducteur/{conducteur}',[ConducteurController::class,'update'])->name('app_update_driver');

@@ -21,10 +21,14 @@ class StatistiqueController extends Controller
        // $currentYear=(int)$cyear;
         $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(montant) AS compteur"))
                                             ->where(DB::raw("YEAR(date_enregistrement)"),$currentYear)
-                                            ->get();
+                                            ->first();
         
-        $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
-       return view('pages.home', compact('records','cars','consomAnnuelle'));
+      //  $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
+
+
+var_dump($consommationAnnuelle);
+        
+       //return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
 
     public function getConsByMonthOfCar(Request $req){

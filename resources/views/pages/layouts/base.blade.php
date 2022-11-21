@@ -115,7 +115,7 @@
               <p class="sidebar-menu-titlee mb-4 text-uppercase">Gestion du Carburant</p>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="{{route('app_home_page')}}">
                 <i class="typcn typcn-device-desktop menu-icon"></i>
                 <span class="menu-title">Tableau de Bord </span>
               </a>
