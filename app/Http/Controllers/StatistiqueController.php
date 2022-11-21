@@ -18,12 +18,11 @@ class StatistiqueController extends Controller
         $cars=Car::count();
         $currentYear= Carbon::now();
         $now=$currentYear->year;
-       /* $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(cast(montant as double precision)) AS compteur"))
+        $consommationAnnuelle=Enregistrement::select(DB::raw("SUM(cast(montant as double precision)) AS compteur"))
                                             ->where( DB::raw("YEAR(date_enregistrement)"),'=',$now)
                                             ->get();
-        $consomAnnuelle=$consommationAnnuelle[0]['compteur'];*/
-        $consomAnnuelle=Enregistrement::where('YEAR(date_enregistrement)','=',$now)
-                                            ->sum('montant');
+        $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
+       
           return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
 
