@@ -156,7 +156,7 @@ class StatistiqueController extends Controller
         for($i=01; $i<=12; $i++){
             $date = Carbon::createFromFormat('m', $i);
             $monthName = $date->format('M');
-            var_dump($monthName);
+            var_dump($date);
             if(in_array($i,$tableMonths)){
                // $results[$monthName]=$tableValue[$i];
             }else{
