@@ -111,7 +111,7 @@
     <div class="card">
       <div class="card-header  d-flex">
         <h4 class="card-title col-6 mt-3">Consommation Mensuelle Par tous les véhicules</h4>
-        <input type="month" class="form-control"  id="parMois_all_cars" />
+        <input type="month" class="form-control"  id="par_mois_all_cars" />
       </div>
       <div class="d-flex offset-6 mt-4">
         <div class="col-7 font-weight-bold">Total de Consommation : <span id='total_consommation_mensuelle_tous_vehicules'> </span> DHs</div>
