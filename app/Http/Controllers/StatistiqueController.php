@@ -23,9 +23,6 @@ class StatistiqueController extends Controller
                                             ->get();
        $consomAnnuelle=$consommationAnnuelle[0]['compteur'];
 
-
-
-        
        return view('pages.home', compact('records','cars','consomAnnuelle'));
     }
 
@@ -141,8 +138,6 @@ class StatistiqueController extends Controller
 
 
     public function getConsByYearOfAllCars(Request $req){
-
-            
         $results=[];
         $tableValue[]=[];
         $tableMonths=[];
@@ -156,11 +151,11 @@ class StatistiqueController extends Controller
         
         foreach ($consommationparannee as $value) {
             $tableValue[$value->indicem]=$value->compteur_year;
-            array_push($tableMonths,$value->indicem );
+            array_push($tableMonths,$value->indicem);
         }
         for($i=1; $i<=12; $i++){
             $date = Carbon::createFromFormat('mm', $i);
-            $monthName = $date->format('MM');
+            $monthName = $date->format('M');
             if(in_array($i,$tableMonths)){
                 $results[$monthName]=$tableValue[$i];
             }else{
@@ -203,8 +198,6 @@ class StatistiqueController extends Controller
             }
           
           }
-
-        
            
       return response()->json([
             'resultat'=>$valeeeur,
