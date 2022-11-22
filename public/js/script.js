@@ -139,7 +139,7 @@ $(document).ready(function () {
         dateprecisee: dateprecisee,
       },
       success: function(result) {
-        $("#consommation_mensuelle_tous_vehicules").append(' <canvas id="barChartMonth-all-cars"></canvas>');
+        $("#consommation_mensuelle_tous_vehicules").append('<canvas id="barChartMonth-all-cars"></canvas>');
           objMonth=[];
           tableauVal=[];
           $.each(result.results, function(indexx, valuue) {
