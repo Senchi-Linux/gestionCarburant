@@ -142,6 +142,7 @@ class StatistiqueController extends Controller
         $tableValue[]=[];
         $tableMonths=[];
         $monthName=null;
+        $indice=0;
 
         $consommationparannee=Enregistrement::select(DB::raw("SUM(montant) AS compteur_year"), DB::raw("to_char(date_trunc('month', date_enregistrement),'mm') AS indicem"))
                                             ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$req->dateprecisee)
@@ -156,9 +157,13 @@ class StatistiqueController extends Controller
         for($i=01; $i<=12; $i++){
             $date = Carbon::createFromFormat('m', $i);
             $monthName = $date->format('M');
-            var_dump($date);
-            if(in_array($i,$tableMonths)){
-               // $results[$monthName]=$tableValue[$i];
+            if($i<10){
+                $indice=str_pad($str,$i,0,STR_PAD_LEFT);
+            }else{
+                $indice=$i;
+            }
+            if(in_array($indice,$tableMonths)){
+             $results[$monthName]=$tableValue[$indice];
             }else{
                 $results[$monthName]=0;
             }
