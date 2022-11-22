@@ -39,7 +39,7 @@ $(document).ready(function () {
       }
     });
 
-    $('#mois').on('change',function (ev) {
+    $('#mois').on('change',function(ev){
       $('#totalCons_car').val('');
       $('#totalConsommationVehicule').html('');
       $('#totalBon_car').val('');
@@ -66,8 +66,7 @@ $(document).ready(function () {
           dateprecisee: dateprecisee,
           car:car
         },
-        success: function(result) {
-       
+        success: function(result){
            $('#records_car').html(result.tableau);
            $('#selctedMonth').html(monthNames[(result.mois)-1]);
            $('#selctedYear').html(result.yeard);
@@ -79,7 +78,6 @@ $(document).ready(function () {
            var totalBonVehicule=$('#totalBon_car').val();
            $('#totalBonVehicule').html(totalBonVehicule);
            
-        
             $.each(result.compteur_mois, function(index, value) {
                 obj[value.indice]=value.compteur;
             });
@@ -102,7 +100,7 @@ $(document).ready(function () {
 
                 for(var j=1; j<=12;j++){
                   if(monthOfYear[j-1]==j){
-                  tableauValYear.push(objYear[j]);
+                    tableauValYear.push(objYear[j]);
                   }else{
                     tableauValYear[j]=0;
                   }            
@@ -111,9 +109,8 @@ $(document).ready(function () {
                 $('#consommation-mensuelle-dun-vehicule').append('<canvas id="barChart-car"></canvas>');
                 $('#consommation-annuelle-dun-vehicule').append('<canvas id="barChartYear-car"></canvas>');
 
-                  chartBar(jourMois, tableauVal,$("#barChart-car"));
-                  chartBar(monthNames, tableauValYear,$("#barChartYear-car"));
-                        
+                chartBar(jourMois, tableauVal,$("#barChart-car"));
+                chartBar(monthNames, tableauValYear,$("#barChartYear-car"));            
           }
       });
     });
@@ -125,8 +122,8 @@ $(document).ready(function () {
     $('#totalBonVehicule').html(totalBonVehicule);
 
 
-  $('#parMois_all_cars').on('change',function (ev) {
-    dateprecisee=ev.target.value;
+  $('#parMois_all_cars').on('change',function(v){
+    dateprecisee=v.target.value;
     $("#consommation_mensuelle_tous_vehicules").html('');
     $("#total_consommation_mensuelle_tous_vehicules").html('');
     $.ajax({
@@ -136,17 +133,18 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
         dateprecisee: dateprecisee,
       },
-      success: function(result) {
-        $("#consommation_mensuelle_tous_vehicules").append('<canvas id="barChartMonth-all-cars"></canvas>');
+      success: function(result){
+          $("#consommation_mensuelle_tous_vehicules").append('<canvas id="barChartMonth-all-cars"></canvas>');
           objMonth=[];
           tableauVal=[];
-          $.each(result.results, function(indexx, valuue) {
+          $.each(result.results, function(indexx, valuue){
             objMonth.push(indexx);
             tableauVal.push(valuue);
-          });          
+          });  
+          console.log(result.total);        
           $("#total_consommation_mensuelle_tous_vehicules").html((result.total).toFixed(2));
-          chartBar(objMonth, tableauVal,$("#barChartMonth-all-cars") );
-        }
+          chartBar(objMonth, tableauVal,$("#barChartMonth-all-cars"));
+      }
     });
   });
 
