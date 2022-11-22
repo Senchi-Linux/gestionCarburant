@@ -150,7 +150,6 @@ $(document).ready(function () {
   $('#parAnnes_all_cars').on('change',function (ev) {
     let objYear =[];
     var tableauValYear=[];
-    compteur_y=0;
     dateprecisee=ev.target.value;
     $("#consommation_annuelle_tous_vehicules").html('');
     $("#total_consommation_annuelle_tous_vehicules").html('');
@@ -170,10 +169,9 @@ $(document).ready(function () {
           $.each(result.results, function(indexx, valuue) {
             objYear.push(indexx);
             tableauValYear.push(valuue);
-            compteur_y+=valuue;
           });
 
-          $("#total_consommation_annuelle_tous_vehicules").html(compteur_y);
+          $("#total_consommation_annuelle_tous_vehicules").html((result.total).toFixed(2));
 
                 chartBar(objYear, tableauValYear,$("#barChartYear-all-cars") );
 

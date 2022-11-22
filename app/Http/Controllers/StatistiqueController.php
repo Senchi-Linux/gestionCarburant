@@ -143,6 +143,7 @@ class StatistiqueController extends Controller
         $tableMonths=[];
         $monthName=null;
         $indice=0;
+        $total=0;
 
         $consommationparannee=Enregistrement::select(DB::raw("SUM(montant) AS compteur_year"), DB::raw("to_char(date_trunc('month', date_enregistrement),'mm') AS indicem"))
                                             ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$req->dateprecisee)
@@ -152,6 +153,8 @@ class StatistiqueController extends Controller
         foreach ($consommationparannee as $value) {
             $tableValue[$value->indicem]=$value->compteur_year;
             array_push($tableMonths,$value->indicem);
+            $total+=$value->compteur_year;
+
         }
 
         for($i=1; $i<=12; $i++){
@@ -169,7 +172,8 @@ class StatistiqueController extends Controller
             }
         }
         return response()->json([
-            'results'=>$results
+            'results'=>$results, 
+            'total'=>$total
         ]);
     }
 
