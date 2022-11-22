@@ -145,7 +145,6 @@ $(document).ready(function () {
           $.each(result.results, function(indexx, valuue) {
             objMonth.push(indexx);
             tableauVal.push(valuue);
-            
           });
           
           $("#total_consommation_mensuelle_tous_vehicules").html((result.total).toFixed(2));
