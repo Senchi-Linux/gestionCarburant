@@ -158,7 +158,7 @@ class StatistiqueController extends Controller
             $date = Carbon::createFromFormat('m', $i);
             $monthName = $date->format('M');
             if($i<10){
-                $indice=str_pad($str,$i,0,STR_PAD_LEFT);
+                $indice=str_pad($i,2,0,STR_PAD_LEFT);
             }else{
                 $indice=$i;
             }
