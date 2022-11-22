@@ -107,6 +107,7 @@ class StatistiqueController extends Controller
         $results=[];
         $tableValue[]=[];
         $tableDaysMonth=[];
+        $total=0;
 
         $yeard= date("Y", strtotime($req->dateprecisee));
         $monthd= date("m", strtotime($req->dateprecisee));
@@ -121,6 +122,7 @@ class StatistiqueController extends Controller
             foreach ($consommationparmois as $value) {
                 $tableValue[$value->indice]=$value->compteur;
                 array_push($tableDaysMonth,$value->indice );
+                $total+=$value->compteur;
             }
 
             for($i=1; $i<=$number; $i++){
@@ -132,7 +134,8 @@ class StatistiqueController extends Controller
             }
 
         return response()->json([
-            'results'=>$results
+            'results'=>$results,
+            'total'=>$total
         ]);
     }
 
@@ -156,7 +159,7 @@ class StatistiqueController extends Controller
             array_push($tableMonths,$value->indicem );
         }
         for($i=1; $i<=12; $i++){
-            $date = Carbon::createFromFormat('mm', $i);
+            $date = Carbon::createFromFormat('m', $i);
             $monthName = $date->format('M');
             if(in_array($i,$tableMonths)){
                 $results[$monthName]=$tableValue[$i];

@@ -126,7 +126,7 @@ $(document).ready(function () {
 
 
   $('#parMois_all_cars').on('change',function (ev) {
-    compteur_m=0;
+
     dateprecisee=ev.target.value;
     $("#consommation_mensuelle_tous_vehicules").html('');
     $("#total_consommation_mensuelle_tous_vehicules").html('');
@@ -145,10 +145,10 @@ $(document).ready(function () {
           $.each(result.results, function(indexx, valuue) {
             objMonth.push(indexx);
             tableauVal.push(valuue);
-            compteur_m+=valuue;
+            
           });
           
-          $("#total_consommation_mensuelle_tous_vehicules").html(compteur_m);
+          $("#total_consommation_mensuelle_tous_vehicules").html(result.total);
           chartBar(objMonth, tableauVal,$("#barChartMonth-all-cars") );
 
         }
