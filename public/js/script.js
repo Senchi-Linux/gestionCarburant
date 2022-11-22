@@ -148,7 +148,7 @@ $(document).ready(function () {
             
           });
           
-          $("#total_consommation_mensuelle_tous_vehicules").html(result.total);
+          $("#total_consommation_mensuelle_tous_vehicules").html((result.total).toFixed(2));
           chartBar(objMonth, tableauVal,$("#barChartMonth-all-cars") );
 
         }
