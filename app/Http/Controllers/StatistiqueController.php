@@ -154,7 +154,7 @@ class StatistiqueController extends Controller
             array_push($tableMonths,$value->indicem);
         }
         for($i=1; $i<=12; $i++){
-            $date = Carbon::createFromFormat('mm', $i);
+            $date = Carbon::createFromFormat('m', $i);
             $monthName = $date->format('M');
             if(in_array($i,$tableMonths)){
                 $results[$monthName]=$tableValue[$i];
