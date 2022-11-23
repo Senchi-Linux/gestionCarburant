@@ -254,7 +254,6 @@ class StatistiqueController extends Controller
 
     public function getConsommationForEveryYear(){
         $tableValue=[];
-        $valeeeur=[];
         $consommationparan=Enregistrement::select(DB::raw("SUM(montant) AS compteur"),DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY') as yeard"))
                                                 ->groupBy(DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"))
                                                 ->get();
@@ -264,10 +263,9 @@ class StatistiqueController extends Controller
             $tableValue[$value->yeard]=$value->compteur;
         }
        
-           return $tableValue;
-      /*return response()->json([
-            'resultaty'=>$valeeeur,
-        ]);*/
+      return response()->json([
+            'results'=>$tableValue,
+        ]);
 
     }
 }
