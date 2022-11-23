@@ -1,6 +1,5 @@
-
 function validerSup(params){
-    Swal({
+    swal({
             title: 'Voulez-vous vraiment effectuer cette suppression ?',
             icon: 'warning',
             buttons: true,
