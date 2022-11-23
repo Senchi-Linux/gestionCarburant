@@ -66,7 +66,7 @@ Route::get('statics_annuel_all_cars',[StatistiqueController::class,'getConsByYea
 Route::get('statistiques_comparaison_comsommation_des_vehicules',[StatistiqueController::class,'createC'])->name('app_comparateur_consommation_vehicules');
 Route::get('statics_comparateur_cosommation_mensuel_cars',[StatistiqueController::class,'getConsoOfCarsInMonth'])->name('app_consommation_cars_mois');
 Route::get('statics_comparateur_cosommation_annuel_cars',[StatistiqueController::class,'getConsoOfCarsInYear'])->name('app_consommation_cars_an');
-
+Route::get('statics_par_an_all_cars',[StatistiqueController::class,'getConsommationForEveryYear'])->name('app_consommation_par_an_cars');
 
 Route::get('profil',[UserController::class,'profil'])->name('app_profil_page');
 });

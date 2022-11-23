@@ -264,11 +264,32 @@ $(document).ready(function () {
     });
     
   });
+  consommationParAnTousVehicules();
 });
 
 
 function daysInMonth (month, year) {
   return new Date(year, month, 0).getDate();
+}
+function consommationParAnTousVehicules(){
+  $.ajax({
+    url: url_variable+'statics_par_an_all_cars',
+    method:'get', 
+    data:{
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+    },
+    success: function(result){
+        $("#consommation_par_an_tous_vehicules").append('<canvas id="barChart-at-year-all-cars"></canvas>');
+        objMonth=[];
+        tableauVal=[];
+        $.each(result.results, function(index, value){
+          objMonth.push(index);
+          tableauVal.push(value);
+        });  
+
+        chartBar(objMonth, tableauVal,$("#barChart-at-year-all-cars"));
+    }
+  });
 }
 
 function chartBar(X, Y, zone){

@@ -135,5 +135,13 @@
     </div>
   </div>
 
-  
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-header  d-flex">
+        <h4 class="card-title col-6 mt-3">Consommation par an de tous les véhicules</h4>
+      </div>
+      
+      <div class="card-body" id="consommation_par_an_tous_vehicules"></div>
+    </div>
+  </div>
 @endsection
