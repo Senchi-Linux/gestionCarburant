@@ -213,7 +213,8 @@
     <!-- End custom js for this page-->
     <script src="{{asset('/js/chart.js')}}"></script>
     <script src="{{asset('/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js">
+    <!--script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
