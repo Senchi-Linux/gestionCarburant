@@ -25,16 +25,16 @@ function validerSup(params){
             }
     });
   };
-
-$(document).ready(function () {
   let url_variable="https://app-gestion-carburant.herokuapp.com/";
-  let monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai","Juin","Juillet", "Août", "Septembre", "Octobre", "Novembre","Décembre"];
-
-    $.ajaxSetup({
+ $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
       }
     });
+$(document).ready(function () {
+  let monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai","Juin","Juillet", "Août", "Septembre", "Octobre", "Novembre","Décembre"];
+
+   
 
     $('#mois').on('change',function(ev){
       $('#totalCons_car').val('');
