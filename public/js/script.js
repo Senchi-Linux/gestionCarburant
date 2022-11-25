@@ -262,6 +262,7 @@ $(document).ready(function () {
 function daysInMonth (month, year) {
   return new Date(year, month, 0).getDate();
 }
+
 function consommationParAnTousVehicules(){
   $.ajax({
     url: url_variable+'statics_par_an_all_cars',
