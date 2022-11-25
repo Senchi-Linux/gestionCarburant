@@ -34,8 +34,6 @@ function validerSup(params){
 $(document).ready(function () {
   let monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai","Juin","Juillet", "Août", "Septembre", "Octobre", "Novembre","Décembre"];
 
-   
-
     $('#mois').on('change',function(ev){
       $('#totalCons_car').val('');
       $('#totalConsommationVehicule').html('');
@@ -218,7 +216,7 @@ $(document).ready(function () {
             });
 
         $("#comparateur_vehicule_mois").append('<canvas id="barChartMonth-comparateur-all-cars"></canvas>');
-        $("#totalConsommationVehicules_par_mois").html(compteur_mois);
+        $("#totalConsommationVehicules_par_mois").html(compteur_mois.toFixed(2));
         $('#mois_year_selected').html(monthNames[(result.mois)-1]+' / '+result.yeard);
 
         chartBar(tableCars, tableCompteur,$("#barChartMonth-comparateur-all-cars") );
@@ -255,7 +253,7 @@ $(document).ready(function () {
 
 
         $("#comparateur_vehicule_annee").append('<canvas id="barChartYear-comparateur-all-cars"></canvas>');
-        $("#totalConsommationVehicules_par_annee").html(compteur_an);
+        $("#totalConsommationVehicules_par_annee").html(compteur_an.toFixed(2));
         $('#year_selected').html(+result.yeard);
 
         chartBar(tableCars, tableCompteur,$("#barChartYear-comparateur-all-cars") );
