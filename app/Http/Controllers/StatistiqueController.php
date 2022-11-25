@@ -209,14 +209,13 @@ class StatistiqueController extends Controller
             }else{
                 $valeeeur[$item->designation.' | '.$item->immatriculation]=0;
             }
-          
         }
            
       return response()->json([
             'resultat'=>$valeeeur,
             'mois'=>$monthd,
             'yeard'=>$yeard,
-            'compteur_mois'=>$compteur_mois
+            'compteur_m'=>$compteur_mois
         ]);
 
     }

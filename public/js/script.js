@@ -215,7 +215,7 @@ $(document).ready(function () {
             });
 
         $("#comparateur_vehicule_mois").append('<canvas id="barChartMonth-comparateur-all-cars"></canvas>');
-        $("#totalConsommationVehicules_par_mois").html((result.compteur_mois).toFixed(2));
+        $("#totalConsommationVehicules_par_mois").html((result.compteur_m).toFixed(2));
         $('#mois_year_selected').html(monthNames[(result.mois)-1]+' / '+result.yeard);
 
         chartBar(tableCars, tableCompteur,$("#barChartMonth-comparateur-all-cars") );
