@@ -189,6 +189,8 @@ class StatistiqueController extends Controller
         $tableValue[]=[];
         $tableidCars=[];
         $valeeeur=[];
+        $compteur_mois=0;
+
         $consommationparmois=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), 'car_id as vehicule')
                                                 ->where(DB::raw("to_char(date_trunc('month', date_enregistrement),'mm')"),'=',$monthd)
                                                 ->where(DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
@@ -199,6 +201,7 @@ class StatistiqueController extends Controller
      foreach ($consommationparmois as  $value) {
             $tableValue[$value->vehicule]=$value->compteur;
             array_push($tableidCars, $value->vehicule);
+            $compteur_mois+=$value->compteur;
         }
         foreach($cars as $item){
             if(in_array($item->id,$tableidCars)){
@@ -212,7 +215,8 @@ class StatistiqueController extends Controller
       return response()->json([
             'resultat'=>$valeeeur,
             'mois'=>$monthd,
-            'yeard'=>$yeard
+            'yeard'=>$yeard,
+            'compteur_mois'=>$compteur_mois
         ]);
 
     }
@@ -222,6 +226,7 @@ class StatistiqueController extends Controller
         $tableValue=[];
         $tableidCars=[];
         $valeeeur=[];
+        $compteur_y=0;
         $consommationparan=Enregistrement::select(DB::raw("SUM(montant) AS compteur"), 'car_id as vehicule')
                                                 ->where( DB::raw("to_char(date_trunc('year', date_enregistrement),'YYYY')"),'=',$yeard)
                                                 ->groupBy('car_id')
@@ -232,6 +237,7 @@ class StatistiqueController extends Controller
         foreach ($consommationparan as  $value) {
             $tableValue[$value->vehicule]=$value->compteur;
             array_push($tableidCars, $value->vehicule);
+            $compteur_y+=$value->compteur;
         }
         foreach($cars as $item){
             if(in_array($item->id,$tableidCars)){
@@ -244,7 +250,8 @@ class StatistiqueController extends Controller
            
       return response()->json([
             'resultaty'=>$valeeeur,
-            'yeard'=>$yeard
+            'yeard'=>$yeard,
+            'compteur_y'=>$compteur_y
         ]);
 
     }

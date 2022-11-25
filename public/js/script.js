@@ -189,6 +189,7 @@ $(document).ready(function () {
     viewMode: "years", 
     minViewMode: "years"
   });
+  
   $('#mois_year_comparateur').on('change', function (e) {
     $("#comparateur_vehicule_mois").html('');
     $("#totalConsommationVehicules_par_mois").html('');
@@ -196,7 +197,6 @@ $(document).ready(function () {
     mois_comparaison=e.target.value;
     tableCars=[];
     tableCompteur=[];
-    compteur_mois=0;
     tableIdCars=[];
 
     $.ajax({
@@ -212,11 +212,10 @@ $(document).ready(function () {
           $.each(result.resultat, function(index, value) {
             tableCars.push(index);
             tableCompteur.push(value);
-            compteur_mois+=value;
             });
 
         $("#comparateur_vehicule_mois").append('<canvas id="barChartMonth-comparateur-all-cars"></canvas>');
-        $("#totalConsommationVehicules_par_mois").html(compteur_mois.toFixed(2));
+        $("#totalConsommationVehicules_par_mois").html((result.compteur_mois).toFixed(2));
         $('#mois_year_selected').html(monthNames[(result.mois)-1]+' / '+result.yeard);
 
         chartBar(tableCars, tableCompteur,$("#barChartMonth-comparateur-all-cars") );
@@ -234,7 +233,6 @@ $(document).ready(function () {
     an_comparaison=e.target.value;
     tableCars=[];
     tableCompteur=[];
-    compteur_an=0;
 
     $.ajax({
       url: url_variable+'statics_comparateur_cosommation_annuel_cars',
@@ -248,12 +246,11 @@ $(document).ready(function () {
         $.each(result.resultaty, function(index, value) {
           tableCars.push(index);
           tableCompteur.push(value);
-          compteur_an+=value;
           });
 
 
         $("#comparateur_vehicule_annee").append('<canvas id="barChartYear-comparateur-all-cars"></canvas>');
-        $("#totalConsommationVehicules_par_annee").html(compteur_an.toFixed(2));
+        $("#totalConsommationVehicules_par_annee").html((result.compteur_y).toFixed(2));
         $('#year_selected').html(+result.yeard);
 
         chartBar(tableCars, tableCompteur,$("#barChartYear-comparateur-all-cars") );
