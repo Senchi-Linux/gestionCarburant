@@ -210,7 +210,7 @@ class StatistiqueController extends Controller
                 $valeeeur[$item->designation.' | '.$item->immatriculation]=0;
             }
           
-          }
+        }
            
       return response()->json([
             'resultat'=>$valeeeur,
