@@ -207,8 +207,6 @@ $(document).ready(function () {
         mois_comparaison: mois_comparaison,
       },
       success: function(result) {
-       
-
           $.each(result.resultat, function(index, value) {
             tableCars.push(index);
             tableCompteur.push(value);
@@ -219,7 +217,6 @@ $(document).ready(function () {
         $('#mois_year_selected').html(monthNames[(result.mois)-1]+' / '+result.yeard);
 
         chartBar(tableCars, tableCompteur,$("#barChartMonth-comparateur-all-cars") );
-
       }
     });
     
@@ -248,17 +245,16 @@ $(document).ready(function () {
           tableCompteur.push(value);
           });
 
-
         $("#comparateur_vehicule_annee").append('<canvas id="barChartYear-comparateur-all-cars"></canvas>');
         $("#totalConsommationVehicules_par_annee").html((result.compteur_y).toFixed(2));
         $('#year_selected').html(+result.yeard);
 
         chartBar(tableCars, tableCompteur,$("#barChartYear-comparateur-all-cars") );
-
       }
     });
     
   });
+  
   consommationParAnTousVehicules();
 });
 
