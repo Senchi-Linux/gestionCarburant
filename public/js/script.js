@@ -77,8 +77,9 @@ $(document).ready(function () {
                 obj[value.indice]=value.compteur;
             });
 
-            $.each(result.compteur_annee, function(indexx, valuue) {
-              objYear[valuue.indicem]=valuue.compteur_y;
+            $.each(result.results, function(indexx, valuue) {
+              objYear.push(indexx);
+              tableauValYear.push(valuue);
             });
             
               var jourMois=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
@@ -93,19 +94,13 @@ $(document).ready(function () {
                   }            
                 };
 
-                for(var j=1; j<=12;j++){
-                  if(monthOfYear[j-1]==j){
-                    tableauValYear.push(objYear[j]);
-                  }else{
-                    tableauValYear[j]=0;
-                  }            
-                };
-
+               
                 $('#consommation-mensuelle-dun-vehicule').append('<canvas id="barChart-car"></canvas>');
                 $('#consommation-annuelle-dun-vehicule').append('<canvas id="barChartYear-car"></canvas>');
 
                 chartBar(jourMois, tableauVal,$("#barChart-car"));
-                chartBar(monthNames, tableauValYear,$("#barChartYear-car"));            
+                chartBar(objYear, tableauValYear,$("#barChartYear-car"));     
+       
           }
       });
     });

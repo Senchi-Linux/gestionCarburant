@@ -29,9 +29,15 @@ class StatistiqueController extends Controller
     public function getConsByMonthOfCar(Request $req){
        
         $tableau=null;
-     
         $km=0;
         $totalConsom=0;
+        $tableValue[]=[];
+        $tableMonths=[];
+        $results=[];
+        $monthName=null;
+        $indice=0;
+        $total=0;
+        
        $monthd= date("m", strtotime($req->dateprecisee));
        $yeard= date("Y", strtotime($req->dateprecisee));
 
@@ -90,10 +96,34 @@ class StatistiqueController extends Controller
         $tableau.='<input type="hidden" id="totalCons_car" value="'.number_format($totalConsom, 2).'">';
         $tableau.='<input type="hidden" id="totalBon_car" value="'.count($records_v).'">';
        
+
+        foreach ($records_compteur_year as $item_year) {
+            $tableValue[$item_year->indicem]=$item_year->compteur_y;
+            array_push($tableMonths,$item_year->indicem);
+            $total+=$item_year->compteur_y;
+
+        }
+
+        for($i=1; $i<=12; $i++){
+            $date = Carbon::createFromFormat('m', $i);
+            $monthName = $date->format('M');
+            if($i<10){
+                $indice=str_pad($i,2,0,STR_PAD_LEFT);
+            }else{
+                $indice=$i;
+            }
+            if(in_array($indice,$tableMonths)){
+             $results[$monthName]=$tableValue[$indice];
+            }else{
+                $results[$monthName]=0;
+            }
+        }
+
+
         return response()->json([
             'tableau'=>$tableau,
             'compteur_mois'=>$records_compteur_mois,
-            'compteur_annee'=>$records_compteur_year,
+            'results'=>$results,
             'mois'=>$monthd,
             'yeard'=>$yeard
         ]);
