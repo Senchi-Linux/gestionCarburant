@@ -24322,8 +24322,8 @@ body.avgrund-active {
   .sidebar-icon-only .sidebar {
     width: 70px;
   }
-  .sidebar-icon-only .sidebar .sidebar-profile .sidebar-profile-name .sidebar-menu-titlee .sidebar-name,
-  .sidebar-icon-only .sidebar .sidebar-profile .sidebar-profile-name .sidebar-designation .sidebar-menu-titlee{
+  .sidebar-icon-only .sidebar .sidebar-profile .sidebar-profile-name .sidebar-name,
+  .sidebar-icon-only .sidebar .sidebar-profile .sidebar-profile-name .sidebar-designation{
     display: none;
   }
   .sidebar-icon-only .sidebar .nav-search {
