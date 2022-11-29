@@ -15,11 +15,14 @@ class EnregistrementController extends Controller
     }
     public function add(Request $req){
         $numOrdre=Enregistrement::count();
+        $cyear =Carbon::now()->format('Y-m-d');
+        $currentYear=Carbon::createFromFormat('Y-m-d', $cyear)->format('Y');
+        $numBon=($req->bon).'/'.$currentYear;
         if($req->responsable==NULL){
             return back()->with('Erreur','Veuillez désigner le responsable qui a signé le bon de commande ');
 
-        }elseif (Enregistrement::where('numBon',$req->bon)->exists()) {
-            return back()->with('Erreur','le Bon N° '.$req->bon.'existe déjà');
+        }elseif(Enregistrement::where('numBon',$numBon)->exists()) {
+            return back()->with('Erreur','le Bon N° '.$numBon.'existe déjà');
         }else{
             Enregistrement::create([
                 'numOrdre'=>($numOrdre+1),
@@ -28,7 +31,7 @@ class EnregistrementController extends Controller
                 'driver'=>$req->conducteur,
                 //'driver_id'=>$req->conducteur,
                 'km'=>$req->km,
-                'numBon'=>$req->bon,
+                'numBon'=>$numBon,
                 'responsable'=>$req->responsable,
                 'montant'=>$req->montant
             ]);
@@ -44,11 +47,15 @@ class EnregistrementController extends Controller
     }
 
     public function update(Request $req,Enregistrement $record ){
+        $cyear =Carbon::now()->format('Y-m-d');
+        $currentYear=Carbon::createFromFormat('Y-m-d', $cyear)->format('Y');
+        $numBon=($req->bon).'/'.$currentYear;
+
         if($req->responsable==NULL){
             return back()->with('Erreur','Veuillez désigner le responsable qui a signé le bon de commande ');
 
-        }elseif (Enregistrement::where('numBon',$req->bon)->where('id','!=',$record->id)->exists()) {
-            return back()->with('Erreur','le Bon N° '.$req->bon.' existe déjà');
+        }elseif (Enregistrement::where('numBon',$numBon)->where('id','!=',$record->id)->exists()) {
+            return back()->with('Erreur','le Bon N° '.$numBon.' existe déjà');
         }else{
             $record->update([
                 'date_enregistrement'=>$req->date_enregistrement,
@@ -56,7 +63,7 @@ class EnregistrementController extends Controller
                 'driver'=>$req->conducteur,
                 //'driver_id'=>$req->conducteur,
                 'km'=>$req->km,
-                'numBon'=>$req->bon,
+                'numBon'=>$numBon,
                 'responsable'=>$req->responsable,
                 'montant'=>$req->montant
             ]);

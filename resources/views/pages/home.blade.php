@@ -74,7 +74,7 @@
                          <td>{{date('d-m-Y',strtotime($record->date_enregistrement))}}</td>
                          <td>{{$record->car->designation}} | {{$record->car->immatriculation}}</td>
                          <td> {{$record->km}}</td>
-                         <td> {{$record->numBon}}</td>
+                         <td><?php $tablNumBon=explode("/",$record->numBon); echo $tablNumBon[0];?> </td>
                          <td> @if($record->responsable=="Delegue")
                               DR Hicham Alaoui Ismaili
                               @else

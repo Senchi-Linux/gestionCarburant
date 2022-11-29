@@ -21,7 +21,7 @@ return new class extends Migration
           //  $table->foreignId('driver_id')->constrained('conducteurs')->onUpdate('cascade')->onDelete('cascade');
             $table->longText('driver');
             $table->bigInteger('km');
-            $table->bigInteger('numBon');
+            $table->string('numBon');
             $table->text('responsable');
             $table->float('montant');
             $table->timestamps();
