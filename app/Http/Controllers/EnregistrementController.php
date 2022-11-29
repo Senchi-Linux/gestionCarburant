@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+
 
 use App\Models\Car;
 use App\Models\Enregistrement;
@@ -18,6 +20,7 @@ class EnregistrementController extends Controller
         $cyear =Carbon::now()->format('Y-m-d');
         $currentYear=Carbon::createFromFormat('Y-m-d', $cyear)->format('Y');
         $numBon=($req->bon).'/'.$currentYear;
+
         if($req->responsable==NULL){
             return back()->with('Erreur','Veuillez désigner le responsable qui a signé le bon de commande ');
 
