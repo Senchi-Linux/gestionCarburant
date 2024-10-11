@@ -40,7 +40,6 @@ class EnregistrementController extends Controller
             ]);
 
             return back();
-           // return redirect('/');
         }
     }
 

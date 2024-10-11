@@ -25,7 +25,7 @@ function validerSup(params){
             }
     });
   };
-  let url_variable="https://app-gestion-carburant.herokuapp.com/";
+  let url_variable="http://127.0.0.1:8000";
  $.ajaxSetup({
       headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
